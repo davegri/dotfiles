@@ -4,13 +4,11 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'tpope/vim-surround'
-Plugin 'scrooloose/nerdtree'
-Plugin 'ctrlpvim/ctrlp.vim' 
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'jiangmiao/auto-pairs'
 Plugin 'pangloss/vim-javascript'
-Plugin 'raimondi/delimitMate'
+Plugin 'mxw/vim-jsx'
+Plugin 'Valloric/YouCompleteMe'
 call vundle#end()
 
 " in osx make clipboard work with system clipboard
@@ -33,10 +31,11 @@ let mapleader=" "
 set tabstop=4
 set softtabstop=4
 set expandtab
+set shiftwidth=4
 
 " indentation
-set autoindent
 filetype plugin indent on
+set autoindent
 set backspace=indent,eol,start
 
 " visuals
@@ -51,24 +50,15 @@ set showmatch
 set incsearch
 set hlsearch
 
-" NERDTree toggle
-nnoremap <Leader>t :NERDTreeToggle<Cr>
-
-" Shortcuts for adding lines without leaving norma mode
-map <Enter> o<ESC>
-map <S-Enter> O<ESC>
+" Shortcut for clearing search
+nnoremap <silent> <leader>c :nohlsearch<CR>
 
 " filetype specific tab options
 autocmd Filetype html setlocal ts=2 sts=2 expandtab
-autocmd Filetype javascript  setlocal ts=2 sts=2 expandtab
 autocmd Filetype python setlocal ts=4 sw=4 sts=0 expandtab
 
-" start nerdtree on startup
-autocmd VimEnter * NERDTree
-autocmd VimEnter * wincmd p
-
-" quit vim if nodetree is left without another buffer
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" configure syntastic to use eslint for javascript
+let g:syntastic_javascript_checkers = ['eslint']
 
 " managing splits with tmux
 if exists('$TMUX')
