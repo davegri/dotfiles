@@ -123,7 +123,7 @@ else
   map <C-l> <C-w>l
 endif
 
-" Drink the koolaid
+" Drink the koolaid!
 map <up> <nop>
 map <down> <nop>
 map <left> <nop>
