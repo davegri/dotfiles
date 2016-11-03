@@ -6,14 +6,10 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'Shougo/neocomplete.vim'
-Plugin 'fatih/vim-go'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 call vundle#end()
 
-" neocomplete
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_auto_select = 1
 " ctrlp ignore
 if executable('ag')
   " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
@@ -27,8 +23,9 @@ else
 endif
 
 " in osx make clipboard work with system clipboard
-set clipboard=unnamed
-set autoread
+" set clipboard=unnamed
+" set autoread
+
 " map leader
 let mapleader=" "
 
@@ -43,9 +40,8 @@ let mapleader=" "
 :noremap k gk
 
 " tab
-set tabstop=4
-set softtabstop=4
-set expandtab
+set expandtab " insert spaces instead of tabs
+set softtabstop=4 
 set shiftwidth=4
 
 " indentation
@@ -58,12 +54,15 @@ syntax enable
 colorscheme molokai
 set background=dark
 set number
-set colorcolumn=80
+set colorcolumn=80 "highlight column at 80 chars
+" set termguicolors " enable 24bit colors
 
 " Search
+set incsearch " incremental search, start searching from first char typed
+set hlsearch " highlight search results
+
+" Misc
 set showmatch
-set incsearch
-set hlsearch
 
 " Shortcut for clearing search
 nnoremap <silent> <leader>c :nohlsearch<CR>
@@ -71,31 +70,8 @@ nnoremap <silent> <leader>c :nohlsearch<CR>
 "shortcut for saving
 noremap <Leader>s :update<CR>
 
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  " For no inserting <CR> key.
-  return pumvisible() ? "\<C-y>" : "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-
-" filetype specific tab options
-autocmd Filetype html setlocal ts=2 sts=2 expandtab
-autocmd Filetype python setlocal ts=4 sw=4 sts=0 expandtab
-
-let g:go_disable_autoinstall = 0
-
-" Highlight
-let g:go_highlight_functions = 1  
-let g:go_highlight_methods = 1  
-let g:go_highlight_structs = 1  
-let g:go_highlight_operators = 1  
-let g:go_highlight_build_constraints = 1  
+" shortcut for global search of word under cursor
+nnoremap <Leader>f :Ggrep -F "<C-R><C-W>"
 
 " managing splits with tmux
 if exists('$TMUX')
