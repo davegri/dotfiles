@@ -86,3 +86,9 @@ source $ZSH/oh-my-zsh.sh
 # set default user in order to hide host name from shell prompt
 DEFAULT_USER="$(whoami)"
 
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+
+# Don't share history between tabs
+unsetopt inc_append_history
+unsetopt share_history

@@ -4,10 +4,15 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'dyng/ctrlsf.vim'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'pangloss/vim-javascript'
+Plugin 'vim-syntastic/syntastic'
+Plugin 'mxw/vim-jsx'
+Plugin 'vim-airline/vim-airline'
+Plugin 'tpope/vim-fugitive'
 call vundle#end()
 
 " ctrlp ignore
@@ -22,9 +27,34 @@ else
   let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
 endif
 
+" ctrlsf
+:nmap     <C-F> <Plug>CtrlSFCwordPath
+:vmap     <C-F> <Plug>CtrlSFVwordPath
+
+" vim airline
+set laststatus=2
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+
+" syntastic
+let g:syntastic_javascript_checkers = ['eslint']
+let local_eslint = finddir('node_modules', '.;') . '/.bin/eslint'
+if matchstr(local_eslint, "^\/\\w") == ''
+    let local_eslint = getcwd() . "/" . local_eslint
+endif
+if executable(local_eslint)
+    let g:syntastic_javascript_eslint_exec = local_eslint
+endif
+
+" vim buffers
+set hidden
+
 " in osx make clipboard work with system clipboard
-" set clipboard=unnamed
-" set autoread
+set clipboard=unnamed
+
+" Trigger autoread when changing buffers or coming back to vim.
+au FocusGained,BufEnter * :silent! !
 
 " map leader
 let mapleader=" "
@@ -64,40 +94,18 @@ set hlsearch " highlight search results
 " Misc
 set showmatch
 
+" vim-jsx plugin
+let g:jsx_ext_required = 0
+
 " Shortcut for clearing search
 nnoremap <silent> <leader>c :nohlsearch<CR>
 
 "shortcut for saving
 noremap <Leader>s :update<CR>
 
-" shortcut for global search of word under cursor
-nnoremap <Leader>f :Ggrep -F "<C-R><C-W>"
-
-" managing splits with tmux
-if exists('$TMUX')
-  function! TmuxOrSplitSwitch(wincmd, tmuxdir)
-    let previous_winnr = winnr()
-    silent! execute "wincmd " . a:wincmd
-    if previous_winnr == winnr()
-      call system("tmux select-pane -" . a:tmuxdir)
-      redraw!
-    endif
-  endfunction
-
-  let previous_title = substitute(system("tmux display-message -p '#{pane_title}'"), '\n', '', '')
-  let &t_ti = "\<Esc>]2;vim\<Esc>\\" . &t_ti
-  let &t_te = "\<Esc>]2;". previous_title . "\<Esc>\\" . &t_te
-
-  nnoremap <silent> <C-h> :call TmuxOrSplitSwitch('h', 'L')<cr>
-  nnoremap <silent> <C-j> :call TmuxOrSplitSwitch('j', 'D')<cr>
-  nnoremap <silent> <C-k> :call TmuxOrSplitSwitch('k', 'U')<cr>
-  nnoremap <silent> <C-l> :call TmuxOrSplitSwitch('l', 'R')<cr>
-else
-  map <C-h> <C-w>h
-  map <C-j> <C-w>j
-  map <C-k> <C-w>k
-  map <C-l> <C-w>l
-endif
+nmap <C-L> :bnext<CR>
+nmap <C-H> :bprevious<CR>
+nmap <C-W> :bp <BAR> bd #<CR>
 
 " Drink the koolaid!
 map <up> <nop>
