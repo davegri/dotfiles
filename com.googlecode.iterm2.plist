@@ -950,15 +950,15 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>1152 230 445 103 0 0 1920 1057 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
-	<string>-360 487 400 129 0 0 1280 777 </string>
+	<string>2800 102 400 129 1920 -315 1280 777 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>2250 -368 620 392 1920 -656 1280 777 </string>
+	<string>650 499 620 392 0 0 1920 1057 </string>
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>138 88 606 456 0 0 1280 777 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>1952 -392 796 473 1920 -656 1280 777 </string>
+	<string>655 552 796 473 0 0 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>795 308 1125 749 0 0 1920 1057 </string>
+	<string>3 528 650 527 0 0 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>323 505 650 527 0 0 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -1825,7 +1825,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-03-01T17:33:02Z</date>
+	<date>2017-08-01T10:20:17Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>TabViewType</key>
@@ -1837,6 +1837,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.0.13</string>
+	<string>3.0.15</string>
 </dict>
 </plist>
