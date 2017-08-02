@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-  export ZSH=/users/david/.oh-my-zsh
+export ZSH=/users/david/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -49,7 +49,7 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git z command-not-found docker npm pip python virtualenvwrapper)
+plugins=(git z command-not-found docker npm pip python virtualenvwrapper bundler rails ruby gem rvm terminalapp brew)
 
 # User configuration
 
@@ -83,12 +83,17 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+alias zshconfig="vi ~/.zshrc"
+
 # set default user in order to hide host name from shell prompt
 DEFAULT_USER="$(whoami)"
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
 
 # Don't share history between tabs
 unsetopt inc_append_history
 unsetopt share_history
+
+MYSQL=/usr/local/mysql/bin
+export PATH=$PATH:$MYSQL
+export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
+
+export PATH="$HOME/.yarn/bin:$PATH"

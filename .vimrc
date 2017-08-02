@@ -9,8 +9,9 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'dyng/ctrlsf.vim'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'pangloss/vim-javascript'
-Plugin 'vim-syntastic/syntastic'
 Plugin 'mxw/vim-jsx'
+Plugin 'vim-syntastic/syntastic'
+Plugin 'leshill/vim-json'
 Plugin 'vim-airline/vim-airline'
 Plugin 'tpope/vim-fugitive'
 call vundle#end()
@@ -85,6 +86,8 @@ colorscheme molokai
 set background=dark
 set number
 set colorcolumn=80 "highlight column at 80 chars
+" xml make tag colors match (for jsx)
+highlight link xmlEndTag xmlTag
 " set termguicolors " enable 24bit colors
 
 " Search
